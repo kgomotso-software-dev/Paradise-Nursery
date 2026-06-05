@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 function AboutUs() {
   return (
     <div className="about-us-container">
-      <h1>Paradise Nursery</h1>
+      <h1>e-plantShopping</h1>
 
       <p>
-        Welcome to Paradise Nursery, your trusted destination for beautiful
+        Welcome toe-plantShopping  Paradise Nursery, your trusted destination for beautiful
         and healthy houseplants. We are passionate about bringing nature
         indoors and helping customers create greener, healthier living
         spaces through a wide variety of indoor plants.
@@ -22,7 +22,7 @@ function AboutUs() {
       </p>
 
       <p>
-        Paradise Nursery offers a diverse collection of plants, including
+        e-plantShopping offers a diverse collection of plants, including
         air-purifying plants, easy-care plants, and decorative indoor
         plants suitable for both beginners and experienced plant lovers.
       </p>
