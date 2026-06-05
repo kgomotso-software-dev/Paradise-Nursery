@@ -1,51 +1,161 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
-import { increaseQuantity, decreaseQuantity, removeItem } from '../features/cart/cartSlice'
-import { Plus, Minus, Trash2 } from 'lucide-react'
 
-const CartItem = ({ item }) => {
-  const dispatch = useDispatch()
-  
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  removeItem,
+  updateQuantity
+} from "../redux/CartSlice";
+import { Link } from "react-router-dom";
+
+function CartItem() {
+  const dispatch = useDispatch();
+
+  const cartItems = useSelector(
+    (state) => state.cart.cartItems
+  );
+
+  const totalItems = cartItems.reduce(
+    (total, item) => total + item.quantity,
+    0
+  );
+
+  const totalCost = cartItems.reduce(
+    (total, item) =>
+      total + item.price * item.quantity,
+    0
+  );
+
+  const increaseQuantity = (item) => {
+    dispatch(
+      updateQuantity({
+        id: item.id,
+        quantity: item.quantity + 1
+      })
+    );
+  };
+
+  const decreaseQuantity = (item) => {
+    if (item.quantity > 1) {
+      dispatch(
+        updateQuantity({
+          id: item.id,
+          quantity: item.quantity - 1
+        })
+      );
+    }
+  };
+
   return (
-    <div className="cart-item">
-      <div className="cart-item-image">
-        <img src={item.image} alt={item.name} />
-      </div>
-      
-      <div className="cart-item-details">
-        <h3 className="cart-item-name">{item.name}</h3>
-        <p className="cart-item-price">Unit Price: ${item.price.toFixed(2)}</p>
-        <p className="cart-item-total">Item Total: ${item.totalPrice.toFixed(2)}</p>
-      </div>
-      
-      <div className="cart-item-quantity">
-        <button 
-          onClick={() => dispatch(decreaseQuantity(item.id))}
-          className="qty-btn"
-          aria-label="Decrease quantity"
+    <div>
+      {/* Navbar */}
+      <nav className="navbar">
+        <h2>Paradise Nursery</h2>
+
+        <div>
+          <Link to="/">Home</Link>{" "}
+          <Link to="/plants">Plants</Link>{" "}
+          <Link to="/cart">
+            Cart ({totalItems})
+          </Link>
+        </div>
+      </nav>
+
+      <div className="cart-container">
+        <h1>Shopping Cart</h1>
+
+        <h2>Total Plants: {totalItems}</h2>
+
+        <h2>
+          Total Cost: ${totalCost.toFixed(2)}
+        </h2>
+
+        {cartItems.length === 0 ? (
+          <p>Your cart is empty.</p>
+        ) : (
+          cartItems.map((item) => (
+            <div
+              key={item.id}
+              className="cart-item"
+            >
+              <img
+                src={item.image}
+                alt={item.name}
+                width="120"
+                height="120"
+              />
+
+              <div>
+                <h3>{item.name}</h3>
+
+                <p>
+                  Unit Price: $
+                  {item.price}
+                </p>
+
+                <p>
+                  Quantity:
+                  {item.quantity}
+                </p>
+
+                <p>
+                  Item Total: $
+                  {(
+                    item.price *
+                    item.quantity
+                  ).toFixed(2)}
+                </p>
+
+                <button
+                  onClick={() =>
+                    increaseQuantity(item)
+                  }
+                >
+                  +
+                </button>
+
+                <button
+                  onClick={() =>
+                    decreaseQuantity(item)
+                  }
+                >
+                  -
+                </button>
+
+                <button
+                  onClick={() =>
+                    dispatch(
+                      removeItem(item.id)
+                    )
+                  }
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          ))
+        )}
+
+        <br />
+
+        <Link to="/plants">
+          <button>
+            Continue Shopping
+          </button>
+        </Link>
+
+        <button
+          onClick={() =>
+            alert(
+              "Checkout feature coming soon!"
+            )
+          }
         >
-          <Minus size={16} />
-        </button>
-        <span className="qty-value">{item.quantity}</span>
-        <button 
-          onClick={() => dispatch(increaseQuantity(item.id))}
-          className="qty-btn"
-          aria-label="Increase quantity"
-        >
-          <Plus size={16} />
+          Checkout
         </button>
       </div>
-      
-      <button 
-        onClick={() => dispatch(removeItem(item.id))}
-        className="delete-btn"
-        aria-label="Remove item"
-      >
-        <Trash2 size={18} />
-        Delete
-      </button>
     </div>
-  )
+  );
 }
 
-export default CartItem
+export default CartItem;
+```
