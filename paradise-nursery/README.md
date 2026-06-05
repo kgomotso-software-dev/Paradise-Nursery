@@ -1,24 +1,63 @@
-# Paradise Nursery - Houseplant Shopping Application
+# Paradise Nursery Shopping Application
 
 ## Project Overview
-Paradise Nursery is a React-based e-commerce application for purchasing houseplants. 
-The application features a landing page, product listing page, and shopping cart functionality.
+
+Paradise Nursery is a React and Redux-based e-commerce application that allows users to browse and purchase a variety of houseplants. The application provides a user-friendly interface for viewing plant categories, adding products to a shopping cart, managing quantities, and viewing the total purchase cost.
 
 ## Features
-- **Landing Page**: Background image, company description, and "Get Started" button
-- **Product Listing Page**: 6+ houseplants organized into 3+ categories with Add to Cart functionality
-- **Shopping Cart**: Dynamic cart management with quantity controls, delete buttons, and total calculation
-- **Header**: Persistent navigation with cart icon showing total item count
-- **State Management**: Redux Toolkit for cart state persistence
+
+### Landing Page
+
+* Company name: Paradise Nursery
+* Background image
+* Company description
+* Get Started button linking to the product listing page
+
+### Product Listing Page
+
+* Multiple houseplant categories
+* Plant thumbnail images
+* Plant names
+* Product prices
+* Add to Cart functionality
+* Dynamic cart quantity indicator
+* Disabled Add to Cart button after item is added
+
+### Shopping Cart Page
+
+* Displays all selected plants
+* Shows plant image, name, and unit price
+* Increase and decrease quantity buttons
+* Delete item functionality
+* Total number of plants
+* Total cart value
+* Continue Shopping button
+* Checkout button displaying "Coming Soon"
 
 ## Technologies Used
-- React 18
-- Redux Toolkit
-- React Router DOM v6
-- Vite
-- LocalStorage for cart persistence
+
+* React
+* Redux Toolkit
+* React Router
+* CSS3
+* JavaScript (ES6)
 
 ## Installation
+
 ```bash
+npm install
+npm start
+```
+
+## Deployment
+
+The application is deployed using GitHub Pages.
+
+## Author
+
+Student Name: __________________
+Course: Developing Front-End Apps with React
+Project: Paradise Nursery Shopping Application
+
 npm install
 npm start
