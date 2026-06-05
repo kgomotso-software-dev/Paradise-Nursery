@@ -1,24 +1,35 @@
-import React from 'react'
+import React from "react";
+import { Link } from "react-router-dom";
 
-const AboutUs = () => {
+function AboutUs() {
   return (
-    <div className="about-us">
-      <h2>About Paradise Nursery</h2>
-      <p>
-        Founded in 2020, Paradise Nursery has been dedicated to bringing the 
-        beauty and tranquility of nature into homes across the country. 
-        We believe that everyone deserves to experience the joy of caring for 
-        houseplants, which is why we carefully select only the healthiest, 
-        most resilient plants for our collection.
-      </p>
-      <p>
-        Whether you're a seasoned plant parent or just starting your green journey, 
-        our team of horticulture experts is here to help you find the perfect 
-        plants for your space and lifestyle. Every plant from Paradise Nursery 
-        comes with detailed care instructions and our 30-day health guarantee.
-      </p>
+    <div className="landing-page">
+      <div className="overlay">
+        <h1>Paradise Nursery</h1>
+
+        <p>
+          Welcome to Paradise Nursery, your trusted destination for beautiful
+          and healthy houseplants. We specialize in providing high-quality
+          indoor plants that enhance the beauty of homes and offices while
+          improving air quality and creating a refreshing environment.
+        </p>
+
+        <p>
+          Our mission is to bring nature closer to people by offering a wide
+          selection of carefully nurtured plants that are easy to maintain and
+          suitable for both beginners and experienced plant enthusiasts. At
+          Paradise Nursery, we believe every space deserves the calming touch
+          of greenery.
+        </p>
+
+        <Link to="/plants">
+          <button className="get-started-btn">
+            Get Started
+          </button>
+        </Link>
+      </div>
     </div>
-  )
+  );
 }
 
-export default AboutUs
+export default AboutUs;
