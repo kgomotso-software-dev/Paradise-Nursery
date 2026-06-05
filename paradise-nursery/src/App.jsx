@@ -4,34 +4,33 @@ import Header from './components/Header'
 import LandingPage from './pages/LandingPage'
 import ProductList from './pages/ProductList'
 import CartPage from './pages/CartPage'
-import './App.css'
+import React from "react";
+import "./App.css";
 
 function App() {
   return (
-    <Router basename="/paradise-nursery"> {/* Replace with your repo name */}
-      <div className="app">
-        <Routes>
-          <Route path="/" element={
-            <>
-              <LandingPage />
-            </>
-          } />
-          <Route path="/products" element={
-            <>
-              <Header />
-              <ProductList />
-            </>
-          } />
-          <Route path="/cart" element={
-            <>
-              <Header />
-              <CartPage />
-            </>
-          } />
-        </Routes>
+    <div className="landing-page">
+      <div className="content">
+        <h1>Paradise Nursery</h1>
+
+        <p>
+          Welcome to Paradise Nursery, your destination for beautiful and
+          healthy houseplants. We provide a wide selection of indoor plants
+          that bring freshness, beauty, and improved air quality to homes
+          and offices. Our mission is to help plant lovers create greener,
+          healthier living spaces with easy-to-care-for plants.
+        </p>
+
+        <button
+          className="get-started-btn"
+          onClick={() => (window.location.href = "/plants")}
+        >
+          Get Started
+        </button>
       </div>
-    </Router>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
+```
