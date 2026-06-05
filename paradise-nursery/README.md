@@ -55,7 +55,8 @@ The application is deployed using GitHub Pages.
 
 ## Author
 
-Student Name: __________________
+Student Name: _Kgomotso
+_________________
 Course: Developing Front-End Apps with React
 Project: Paradise Nursery Shopping Application
 
