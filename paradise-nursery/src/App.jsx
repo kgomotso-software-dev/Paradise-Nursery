@@ -1,33 +1,32 @@
-import React from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Header from './components/Header'
-import LandingPage from './pages/LandingPage'
-import ProductList from './pages/ProductList'
-import CartPage from './pages/CartPage'
-import React from "react";
-import "./App.css";
+
+import React, { useState } from "react";
+import AboutUs from "./AboutUs";
+import ProductList from "./ProductList";
 
 function App() {
+  const [showProductList, setShowProductList] = useState(false);
+
   return (
-    <div className="landing-page">
-      <div className="content">
-        <h1>Paradise Nursery</h1>
+    <div>
+      {!showProductList ? (
+        <div className="landing-page">
+          <h1>Paradise Nursery</h1>
 
-        <p>
-          Welcome to Paradise Nursery, your destination for beautiful and
-          healthy houseplants. We provide a wide selection of indoor plants
-          that bring freshness, beauty, and improved air quality to homes
-          and offices. Our mission is to help plant lovers create greener,
-          healthier living spaces with easy-to-care-for plants.
-        </p>
+          <p>
+            Welcome to Paradise Nursery, your trusted destination for
+            beautiful houseplants. We provide a wide variety of indoor
+            plants that help create healthier and greener living spaces.
+          </p>
 
-        <button
-          className="get-started-btn"
-          onClick={() => (window.location.href = "/plants")}
-        >
-          Get Started
-        </button>
-      </div>
+          <button
+            onClick={() => setShowProductList(true)}
+          >
+            Get Started
+          </button>
+        </div>
+      ) : (
+        <ProductList />
+      )}
     </div>
   );
 }
