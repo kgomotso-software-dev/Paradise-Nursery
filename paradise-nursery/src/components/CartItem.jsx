@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -11,7 +10,7 @@ function CartItem() {
   const dispatch = useDispatch();
 
   const cartItems = useSelector(
-    (state) => state.cart.cartItems
+    (state) => state.cart.items
   );
 
   const totalItems = cartItems.reduce(
@@ -25,137 +24,126 @@ function CartItem() {
     0
   );
 
-  const increaseQuantity = (item) => {
+  const handleIncrease = (id, quantity) => {
     dispatch(
       updateQuantity({
-        id: item.id,
-        quantity: item.quantity + 1
+        id,
+        quantity: quantity + 1
       })
     );
   };
 
-  const decreaseQuantity = (item) => {
-    if (item.quantity > 1) {
+  const handleDecrease = (id, quantity) => {
+    if (quantity > 1) {
       dispatch(
         updateQuantity({
-          id: item.id,
-          quantity: item.quantity - 1
+          id,
+          quantity: quantity - 1
         })
       );
     }
   };
 
+  const handleDelete = (id) => {
+    dispatch(removeItem(id));
+  };
+
   return (
-    <div>
-      {/* Navbar */}
-      <nav className="navbar">
-        <h2>Paradise Nursery</h2>
+    <div className="cart-container">
+      <h1>Shopping Cart</h1>
 
-        <div>
-          <Link to="/">Home</Link>{" "}
-          <Link to="/plants">Plants</Link>{" "}
-          <Link to="/cart">
-            Cart ({totalItems})
-          </Link>
-        </div>
-      </nav>
+      <h2>Total Plants: {totalItems}</h2>
 
-      <div className="cart-container">
-        <h1>Shopping Cart</h1>
+      <h2>
+        Total Cost: $
+        {totalCost.toFixed(2)}
+      </h2>
 
-        <h2>Total Plants: {totalItems}</h2>
+      {cartItems.length === 0 ? (
+        <p>Your cart is empty.</p>
+      ) : (
+        cartItems.map((item) => (
+          <div
+            key={item.id}
+            className="cart-item"
+          >
+            <img
+              src={item.image}
+              alt={item.name}
+              width="150"
+            />
 
-        <h2>
-          Total Cost: ${totalCost.toFixed(2)}
-        </h2>
+            <h3>{item.name}</h3>
 
-        {cartItems.length === 0 ? (
-          <p>Your cart is empty.</p>
-        ) : (
-          cartItems.map((item) => (
-            <div
-              key={item.id}
-              className="cart-item"
+            <p>
+              Unit Price:
+              ${item.price}
+            </p>
+
+            <p>
+              Quantity:
+              {item.quantity}
+            </p>
+
+            <p>
+              Total Cost:
+              $
+              {(
+                item.price *
+                item.quantity
+              ).toFixed(2)}
+            </p>
+
+            <button
+              onClick={() =>
+                handleIncrease(
+                  item.id,
+                  item.quantity
+                )
+              }
             >
-              <img
-                src={item.image}
-                alt={item.name}
-                width="120"
-                height="120"
-              />
+              +
+            </button>
 
-              <div>
-                <h3>{item.name}</h3>
+            <button
+              onClick={() =>
+                handleDecrease(
+                  item.id,
+                  item.quantity
+                )
+              }
+            >
+              -
+            </button>
 
-                <p>
-                  Unit Price: $
-                  {item.price}
-                </p>
+            <button
+              onClick={() =>
+                handleDelete(item.id)
+              }
+            >
+              Delete
+            </button>
 
-                <p>
-                  Quantity:
-                  {item.quantity}
-                </p>
+            <hr />
+          </div>
+        ))
+      )}
 
-                <p>
-                  Item Total: $
-                  {(
-                    item.price *
-                    item.quantity
-                  ).toFixed(2)}
-                </p>
-
-                <button
-                  onClick={() =>
-                    increaseQuantity(item)
-                  }
-                >
-                  +
-                </button>
-
-                <button
-                  onClick={() =>
-                    decreaseQuantity(item)
-                  }
-                >
-                  -
-                </button>
-
-                <button
-                  onClick={() =>
-                    dispatch(
-                      removeItem(item.id)
-                    )
-                  }
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          ))
-        )}
-
-        <br />
-
-        <Link to="/plants">
-          <button>
-            Continue Shopping
-          </button>
-        </Link>
-
-        <button
-          onClick={() =>
-            alert(
-              "Checkout feature coming soon!"
-            )
-          }
-        >
-          Checkout
+      <Link to="/products">
+        <button>
+          Continue Shopping
         </button>
-      </div>
+      </Link>
+
+      <button
+        onClick={() =>
+          alert("Coming Soon")
+        }
+      >
+        Checkout
+      </button>
     </div>
   );
 }
 
 export default CartItem;
-```
